@@ -1,0 +1,189 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: teal; icon-glyph: heartbeat;
+function createLogin() {
+  let alert = new Alert();
+  alert.title = "🩸DR4XO VIP🩸";
+  alert.message = "BEST IOS REGEDIT:";
+  alert.addTextField("Write pass");
+  alert.addAction("ENTER");
+  alert.addCancelAction("Cancel");
+
+  alert.present().then((response) => {
+    let password = alert.textFieldValue(0);
+    if (password === "DR4XO FF") {
+      let webView = new WebView();
+      webView.loadHTML(createMenu());
+      webView.present();
+    } else {
+      let errorAlert = new Alert();
+      errorAlert.title = "❌ Incorrect";
+      errorAlert.message = "your pass incorrect!";
+      errorAlert.addAction("OK");
+      errorAlert.present();
+    }
+  });
+}
+
+function createMenu() {
+  return `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>🩸DR4XO VIP  🩸</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                height: 100vh;
+                margin: 0;
+                background: radial-gradient(circle at top, #0f0f0f, #000000);
+                color: #ffffff;
+                overflow: hidden;
+            }
+            .container {
+                width: 330px;
+                padding: 22px;
+                background: linear-gradient(135deg, #1a1a40, #2e0854);
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+                margin-top: 100px;
+                position: fixed;
+                border: 2px solid #3f00ff;
+            }
+            h2 {
+                text-align: center;
+                color: #00ffff;
+                text-shadow: 0 0 10px #00ffff;
+                font-size: 20px;
+            }
+            .switch-btn {
+                display: block;
+                width: 100%;
+                padding: 12px;
+                margin: 15px 0;
+                text-align: center;
+                background: linear-gradient(90deg, #006400, #00b300);
+                border-radius: 6px;
+                color: #fff;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .switch-btn.off {
+                background: linear-gradient(90deg, #8b0000, #ff0000);
+            }
+            .menu-item {
+                margin: 10px 0;
+                padding: 12px;
+                background: linear-gradient(90deg, #4b0082, #00008b);
+                border-radius: 6px;
+                cursor: pointer;
+                text-align: center;
+                color: #fff;
+                position: relative;
+                font-size: 16px;
+                font-weight: bold;
+                transition: all 0.2s ease-in-out;
+            }
+            .menu-item:hover {
+                background: linear-gradient(90deg, #00008b, #4b0082);
+                transform: scale(1.02);
+            }
+            .menu-item::before {
+                content: '▶';
+                position: absolute;
+                left: 10px;
+                font-size: 14px;
+                transition: transform 0.2s;
+            }
+            .menu-item.open::before {
+                transform: rotate(90deg);
+            }
+            .sub-options {
+                display: none;
+                padding-left: 15px;
+                margin-top: 5px;
+            }
+            .checkbox-label {
+                font-size: 16px;
+                color: #e0e0e0;
+            }
+            .checkbox-label input {
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+                margin-right: 8px;
+                accent-color: #00ffff;
+            }
+            .command-prompt {
+                margin-top: 22px;
+                padding: 12px;
+                background: #111122;
+                border: 1px solid #00ffff;
+                border-radius: 6px;
+                font-size: 14px;
+                max-height: 110px;
+                overflow-y: auto;
+                color: #00ffea;
+                font-family: monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="mod-menu" id="modMenu">
+                <h2>DR4XO VIP🩸</h2>
+                <div class="switch-btn" id="mainSwitch" onclick="togglePanel(this)">✅ PANEL ACTIVADO</div>
+                <div id="panelContent">
+                  <div class="menu-item" onclick="toggleOptions(this, 'trick-options')">NO RECOIL 🔥</div>
+                  <div class="sub-options" id="trick-options">
+                      <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'REGEDIT PRO')"> REGEDIT PRO</label><br>
+                      <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'AUTO AIM VIP')"> AUTO AIM VIP</label>
+                  </div>
+                  <div class="menu-item" onclick="toggleOptions(this, 'aim-options')">AIMLOCK ⚡</div>
+                  <div class="sub-options" id="aim-options">
+                      <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'HEADSHOT 100%')"> HEADSHOT 100%</label><br>
+                      <label class="checkbox-label"><input type="checkbox" onchange="updatePrompt(this, 'STABILIZER')"> STABILIZER</label>
+                  </div>
+                </div>
+                <div class="command-prompt" id="commandPrompt"></div>
+            </div>
+        </div>
+        <script>
+            function toggleOptions(element, id) {
+                const options = document.getElementById(id);
+                const isOpen = options.style.display === 'block';
+                options.style.display = isOpen ? 'none' : 'block';
+                element.classList.toggle('open', !isOpen);
+            }
+            function updatePrompt(checkbox, modName) {
+                const prompt = document.getElementById('commandPrompt');
+                let message = modName + (checkbox.checked ? " ✅ ACTIVE" : " ❌ Desactivado");
+                const color = checkbox.checked ? '#00ff7f' : '#ff4444';
+                prompt.innerHTML += '<span style="color: ' + color + ';">' + message + '</span><br>';
+                prompt.scrollTop = prompt.scrollHeight;
+            }
+            function togglePanel(button) {
+                const panel = document.getElementById('panelContent');
+                if (panel.style.display === 'none') {
+                    panel.style.display = 'block';
+                    button.innerText = '✅ PANEL ACTIVADO';
+                    button.classList.remove('off');
+                } else {
+                    panel.style.display = 'none';
+                    button.innerText = '❌ PANEL DESACTIVADO';
+                    button.classList.add('off');
+                }
+            }
+        </script>
+    </body>
+    </html>
+  `;
+}
+
+createLogin();
